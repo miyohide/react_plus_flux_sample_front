@@ -2,7 +2,7 @@ var React = require("react");
 var WebAPIUtils = require("../../utils/WebAPIUtils.js");
 var StoryStore = require("../../stores/StoryStore.react.jsx");
 var StoryActionCreators = require("../../actions/StoryActionCreators.react.jsx");
-var State = require("react-router")
+var State = require("react-router");
 
 var StoryPage = React.createClass({
     mixins: [ State ],
