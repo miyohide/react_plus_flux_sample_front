@@ -32,7 +32,7 @@ var StoriesPage = React.createClass({
     },
 
     render: function() {
-        var errors = (this.state.errors.length > 0 ) ? <ErrorNotice errors={this.state.errors} /> : <div></div>
+        var errors = (this.state.errors.length > 0 ) ? <ErrorNotice errors={this.state.errors} /> : <div></div>;
         return (
             <div>
                 {errors}
@@ -67,8 +67,8 @@ var StoriesList = React.createClass({
             <ul className="large-8 medium-10 small-12 small-centered columns">
                 {this.props.stories.map(function(story, index) {
                     return <StoryItem story={story} key={"story-" + index}/>
-                    })}
-                </ul>
+                })}
+            </ul>
         );
     }
 });
