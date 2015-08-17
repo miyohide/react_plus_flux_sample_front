@@ -1,12 +1,12 @@
-var SmallAppDispatcher = require("../dispatcher/SmallAppDispatcher.js");
-var SmallConstants = require("../constants/SmallConstants.js");
-var SessionStore = require("../stores/SessionStore.react.jsx");
-var StoryStore = require("../stores/StoryStore.react.jsx");
-var EventEmitter = require("events").EventEmitter;
-var assign = require("object-assign");
+var SmallAppDispatcher = require('../dispatcher/SmallAppDispatcher.js');
+var SmallConstants = require('../constants/SmallConstants.js');
+var SessionStore = require('../stores/SessionStore.react.jsx');
+var StoryStore = require('../stores/StoryStore.react.jsx');
+var EventEmitter = require('events').EventEmitter;
+var assign = require('object-assign');
 
-var Router = require("react-router");
-var routes = require("../routes.jsx");
+var Router = require('react-router');
+var routes = require('../routes.jsx');
 
 var router = Router.create({
     routes: routes,
@@ -14,7 +14,7 @@ var router = Router.create({
 });
 
 var ActionTypes = SmallConstants.ActionTypes;
-var CHANGE_EVENT = "change";
+var CHANGE_EVENT = 'change';
 
 var RouteStore = assign({}, EventEmitter.prototype, {
     emitChange: function() {
@@ -34,7 +34,7 @@ var RouteStore = assign({}, EventEmitter.prototype, {
     },
 
     redirectHome: function() {
-        router.transitionTo("app");
+        router.transitionTo('app');
     }
 });
 
@@ -52,14 +52,14 @@ RouteStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
             break;
 
         case ActionTypes.LOGIN_RESPONSE:
-            if (sessionStore.isLoggedIn()) {
-                router.transitionTo("app");
+            if (SessionStore.isLoggedIn()) {
+                router.transitionTo('app');
                 $(document).foundation();
             }
             break;
 
         case ActionTypes.RECEIVE_CREATED_STORY:
-            router.transitionTo("app");
+            router.transitionTo('app');
         break;
 
         default:
