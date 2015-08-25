@@ -9,11 +9,14 @@ var Header = React.createClass({
         isLoggedIn: ReactPropTypes.bool,
         email: ReactPropTypes.string
     },
+    // TODO logoutの時に画面が特に遷移せずにいるのは分かりにくい用に思う。
     logout: function(e) {
         e.preventDefault();
         SessionActionCreators.logout();
     },
+    // renderはComponentをひとつ返すことができる。複数返すことはできない。
     render: function() {
+        // ログインしているときは、メールアドレスを表示させ、ログアウトリンクを出す
         var rightNav = this.props.isLoggedIn ? (
             <ul className="right">
                 <li className="has-dropdown">
@@ -24,15 +27,19 @@ var Header = React.createClass({
                 </li>
             </ul>
         ) : (
+            // ログインしていない時は、ログインリンクとサインアップリンクを出す
             <ul className="right">
+                // ここのlogin/signupはscripts/routes.jsxでRouteタグで指定したもの？
                 <li><Link to="login">Login</Link></li>
                 <li><Link to="signup">Sign up</Link></li>
             </ul>
         );
 
+        // ログインしているときは、New storyリンクを出し、ログインしていない時は何も出さない
         var leftNav = this.props.isLoggedIn ? (
             <ul className="left">
                 <li>
+                    // ここのnew-storyはscripts/routes.jsxでRouteタグで指定したもの？
                     <Link to="new-story">New story</Link>
                 </li>
             </ul>
@@ -49,6 +56,7 @@ var Header = React.createClass({
                     <li className="toggle-topbar" menu-icon><a href="#"><span>Menu</span></a></li>
                 </ul>
 
+                // 上で宣言した変数は{}で参照できるっぽい。
                 <section className="top-bar-section">
                     {rightNav}
                     {leftNav}
@@ -59,4 +67,3 @@ var Header = React.createClass({
 });
 
 module.exports = Header;
-
