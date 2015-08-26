@@ -5,10 +5,19 @@ var request = require("superagent");
 function _getErrors(res) {
     var errorMsgs = ["Something went wrong, please try again"];
     if ((json = JSON.parse(res.text))) {
-        if (json["errors"]) {
-            errorMsgs = json["errors"];
-        } else if (json["error"]) {
-            errMsgs = [json["error"]];
+        // Warning W069 - ['errors'] is better written in dot notation. って出る
+        // オブジェクトのプロパティを参照する場合、静的に決定している場合は
+        // ドットを使った参照（この場合、json.errors）としたほうが良いって
+        // 意味らしい。それに従い、json.erros/json.errorに変更。
+        // if (json["errors"]) {
+        //     errorMsgs = json["errors"];
+        // } else if (json["error"]) {
+        //     errMsgs = [json["error"]];
+        // }
+        if (json.errors) {
+            errorMsgs = json.errors;
+        } else if (json.error) {
+            errMsgs = [json.error];
         }
     }
     return errorMsgs;
@@ -98,4 +107,3 @@ module.exports = {
             });
     }
 };
-
