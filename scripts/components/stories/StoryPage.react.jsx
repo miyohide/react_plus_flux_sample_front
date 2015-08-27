@@ -1,3 +1,4 @@
+// Storyを表示する画面をレンダリングする
 var React = require("react");
 var WebAPIUtils = require("../../utils/WebAPIUtils.js");
 var StoryStore = require("../../stores/StoryStore.react.jsx");
@@ -5,8 +6,11 @@ var StoryActionCreators = require("../../actions/StoryActionCreators.react.jsx")
 var State = require("react-router");
 
 var StoryPage = React.createClass({
+    // mixin。複数のコンポーネント間で処理を共通化することができる。
     mixins: [ State ],
 
+    // コンポーネントがマウントされる前に実行される。
+    // 戻り値は、this.stateの初期値となる。
     getInitialState: function() {
         return {
             story: StoryStore.getAllStories(),
@@ -14,11 +18,13 @@ var StoryPage = React.createClass({
         };
     },
 
+    // クライアント上でのみ、初期描画(rendering)が発生した直後に一度実行。
     componentDidMount: function() {
         StoryStore.addChangeListener(this._onChange);
         StoryActionCreators.loadStory(this.getParams().storyId);
     },
 
+    // クライアント上でもサーバー上でも、初期描画(rendering)が発生する直前に一度実行
     componentWillUnmount: function() {
         StoryStore.removeChangeListener(this._onChange);
     },
@@ -42,4 +48,3 @@ var StoryPage = React.createClass({
 });
 
 module.exports = StoryPage;
-
