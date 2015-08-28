@@ -1,3 +1,4 @@
+// Storyの新規作成画面をレンダリングする
 var React = require("react");
 var SmallAppDispatcher = require("../../dispatcher/SmallAppDispatcher.js");
 var SmallConstants = require("../../constants/SmallConstants.js");
@@ -15,6 +16,10 @@ var StoryNew = React.createClass({
 
     _onSubmit: function(e) {
         e.preventDefault();
+        // getDOMNodeでブラウザのネイティブなDOM要素に相当するものを返す。
+        // TODO getDOMNodeは非推奨。React.findDOMNode()に置き換えられているらしい
+        // refsの詳細についてはここを参照。
+        // http://js.studio-kingdom.com/react/guides/more_about_refs
         var title = this.refs.title.getDOMNode().value;
         var body = this.refs.body.getDOMNode().value;
         StoryActionCreators.createStory(title, body);
@@ -40,4 +45,3 @@ var StoryNew = React.createClass({
 });
 
 module.exports = StoryNew;
-
